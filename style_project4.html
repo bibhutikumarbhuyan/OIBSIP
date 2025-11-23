@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Temperature Converter</title>
+<link rel="stylesheet" href="style_project4.css" />
+</head>
+<body>
+<div class="container">
+<h2>Temperature Converter</h2>
+
+
+<input type="text" id="inputTemp" placeholder="Enter temperature" />
+
+
+<select id="inputUnit">
+<option value="C">Celsius (°C)</option>
+<option value="F">Fahrenheit (°F)</option>
+<option value="K">Kelvin (K)</option>
+</select>
+
+
+<select id="outputUnit">
+<option value="C">Celsius (°C)</option>
+<option value="F">Fahrenheit (°F)</option>
+<option value="K">Kelvin (K)</option>
+</select>
+
+
+<button onclick="convertTemperature()">Convert</button>
+
+
+<div class="result" id="result">Converted Temperature: --</div>
+</div>
+
+
+<script>
+function convertTemperature() {
+const temp = parseFloat(document.getElementById('inputTemp').value);
+const inputUnit = document.getElementById('inputUnit').value;
+const outputUnit = document.getElementById('outputUnit').value;
+const resultDiv = document.getElementById('result');
+
+
+if (isNaN(temp)) {
+resultDiv.textContent = "Please enter a valid number!";
+return;
+}
+
+
+let tempInCelsius;
+
+
+if (inputUnit === 'C') tempInCelsius = temp;
+if (inputUnit === 'F') tempInCelsius = (temp - 32) * (5/9);
+if (inputUnit === 'K') tempInCelsius = temp - 273.15;
+
+
+let finalTemp;
+
+
+if (outputUnit === 'C') finalTemp = tempInCelsius;
+if (outputUnit === 'F') finalTemp = (tempInCelsius * 9/5) + 32;
+if (outputUnit === 'K') finalTemp = tempInCelsius + 273.15;
+
+
+resultDiv.textContent = `Converted Temperature: ${finalTemp.toFixed(2)} °${outputUnit}`;
+}
+</script>
+</body>
+</html>
